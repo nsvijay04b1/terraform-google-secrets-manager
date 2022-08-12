@@ -14,13 +14,21 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on th
 
 ```hcl
 module "secret" {
-  source     = "memes/secret-manager/google"
+  source  = "../terraform-google-secrets-manager"
   version    = "2.0.0"
   project_id = "my-project-id"
   id         = "my-secret"
-  secret     = "T0pS3cret!"
   accessors  = ["group:team@example.com"]
+  region = "europe-west3"
+  secretsmanager_use_suffix = false
+  cloud_secrets = {
+  sql-username-example = {
+      var_secret_name     = "sql-new-username-example",
+      var_secret_map_name = "username1"
+     }
+  }
 }
+
 ```
 
 
